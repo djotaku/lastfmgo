@@ -1,0 +1,3 @@
+# lastfmgo
+
+This is a library for accessing the [last.fm API](https://www.last.fm/api) via golang. Currently it implements the endpoints I need for https://github.com/djotaku/lastfmbluesky and https://github.com/djotaku/lastfmmastodon . I may eventually cover the full API, but it's not a focus for me. I will definitely accept PRs to add other endpoints, but I'm not ready for that yet. I need to make a few changes to this code first.
