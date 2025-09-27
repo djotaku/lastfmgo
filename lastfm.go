@@ -13,6 +13,10 @@ type Lastfm struct {
 	Username string
 }
 
+// SubmitLastfmCommand submits a request to the last.fm API
+// the period is the period of data to return
+// the apiKey is specific to your app, see the README for instructions
+// the string returned is JSON
 func SubmitLastfmCommand(period string, apiKey string, user string) (string, error) {
 	apiURLBase := "https://ws.audioscrobbler.com/2.0/?"
 	queryParameters := url.Values{}
