@@ -27,6 +27,7 @@ type Lastfm struct {
 // returns the JSON response from the last.fm API and/or any golang errors
 func UserGetTopArtists(user string, period string, limit string, page string, apiKey string) (string, error) {
 	parameters := map[string]string{
+		"method":  "user.gettopartists",
 		"user":    user,
 		"period":  period,
 		"limit":   limit,
