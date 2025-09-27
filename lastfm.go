@@ -16,27 +16,38 @@ type Lastfm struct {
 	Username string
 }
 
-// SubmitLastfmCommand submits a request to the last.fm API
-// the period is the period of data to return
-// the apiKey is specific to your app, see the README for instructions
+// User API endpoints
+
+// userGetTopArtists accesses the endpoint defined as user.getTopArtists
+// user  : The user name to fetch top artists for.
+// period : overall | 7day | 1month | 3month | 6month | 12month - The time period over which to retrieve top artists for.
+// limit : The number of results to fetch per page. Defaults to 50.
+// page : The page number to fetch. Defaults to first page.
+// apiKey : A Last.fm API key. See README for instructions for obtaining one.
+// returns the JSON response from the last.fm API and/or any golang errors
+func UserGetTopArtists(user string, period string, limit string, page string, apiKey string) (string, error) {
+	parameters := map[string]string{
+		"user":    user,
+		"period":  period,
+		"limit":   limit,
+		"page":    page,
+		"api_key": apiKey,
+	}
+	return submitLastfmCommand(parameters)
+}
+
+// submitLastfmCommand submits a request to the last.fm API
+// parameters is a map in which the key is the name of the parameter and the value is the value of the parameter
 // the string returned is JSON
-func SubmitLastfmCommand(period string, apiKey string, user string) (string, error) {
+func submitLastfmCommand(parameters map[string]string) (string, error) {
 	apiURLBase := "https://ws.audioscrobbler.com/2.0/?"
 	queryParameters := url.Values{}
-	queryParameters.Set("method", "user.gettopartists")
-	queryParameters.Set("user", user)
-	switch period {
-	case "weekly":
-		queryParameters.Set("period", "7day")
-	case "annual":
-		queryParameters.Set("period", "12month")
-	case "quarterly":
-		queryParameters.Set("period", "3month")
+	for key, value := range parameters {
+		queryParameters.Set(key, value)
 	}
-	queryParameters.Set("api_key", apiKey)
 	queryParameters.Set("format", "json")
 	fullURL := apiURLBase + queryParameters.Encode()
-	lastfmResponse, statusCode, err := WebGet(fullURL)
+	lastfmResponse, statusCode, err := webGet(fullURL)
 	if err != nil {
 		fmt.Println(statusCode)
 		return lastfmResponse, err
@@ -45,7 +56,7 @@ func SubmitLastfmCommand(period string, apiKey string, user string) (string, err
 }
 
 // webGet handles contacting a URL
-func WebGet(url string) (string, int, error) {
+func webGet(url string) (string, int, error) {
 	response, err := http.Get(url)
 	if err != nil {
 		return "Error accessing URL", 0, err
