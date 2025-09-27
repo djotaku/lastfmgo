@@ -1,3 +1,6 @@
+// Package lastfmgo implements the [last.fm API]
+//
+// [last.fm API]: https://www.last.fm/api
 package lastfmgo
 
 import (
