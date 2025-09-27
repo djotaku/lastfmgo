@@ -1,6 +1,6 @@
 # lastfmgo
 
-This is a library for accessing the [last.fm API](https://www.last.fm/api) via golang. For last.fm get your key and secret at: https://www.last.fm/api/account/create (more about their API at: https://www.last.fm/api). Currently it implements the endpoints I need for [lastfmSocials](https://github.com/djotaku/lastfmSocials) which took over for the taskign in [lastfmBluesky]( https://github.com/djotaku/lastfmbluesky) and [lastfmMastoston](https://github.com/djotaku/lastfmmastodon). I may eventually cover the full API, but it's not a focus for me. I will definitely accept PRs to add other endpoints, but I'm not ready for that yet. I need to make a few changes to this code first.
+This is a library for accessing the [last.fm API](https://www.last.fm/api) via golang. For last.fm get your key and secret at: https://www.last.fm/api/account/create. Currently it implements the endpoints I need for [lastfmSocials](https://github.com/djotaku/lastfmSocials) which took over for the taskign in [lastfmBluesky]( https://github.com/djotaku/lastfmbluesky) and [lastfmMastoston](https://github.com/djotaku/lastfmmastodon). I may eventually cover the full API, but it's not a focus for me. I will definitely accept PRs to add other endpoints, but I'm not ready for that yet. I need to make a few changes to this code first.
 
 ## API Stability
 
