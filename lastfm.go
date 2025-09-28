@@ -18,7 +18,39 @@ type Lastfm struct {
 
 // User API endpoints
 
-// userGetTopArtists accesses the endpoint defined as user.getTopArtists
+// user.getFriends
+
+// UserGetInfo accesses the endpoint defined as user.getinfo
+// user: The user to fetch info for. API Defaults to the authenticated user, but this library requirees a user to be specified.
+// apiKey: A Last.fm API key. See README for instructions for obtaining one.
+// returns the JSON response from the last.fm API and/or any golang errors
+func UserGetInfo(user string, apiKey string) (string, error) {
+	parameters := map[string]string{
+		"method":  "user.getinfo",
+		"user":    user,
+		"api_key": apiKey,
+	}
+	return submitLastfmCommand(parameters)
+}
+
+// UserGetLovedTracks gets the endpoint at user.getlovedtracks
+// user  : The user name to fetch top artists for.
+// limit : The number of results to fetch per page. Defaults to 50.
+// page : The page number to fetch. Defaults to first page.
+// apiKey : A Last.fm API key. See README for instructions for obtaining one.
+// returns the JSON response from the last.fm API and/or any golang errors
+func UserGetLovedTracks(user string, limit string, page string, apiKey string) (string, error) {
+	parameters := map[string]string{
+		"method":  "user.getlovedtracks",
+		"user":    user,
+		"limit":   limit,
+		"page":    page,
+		"api_key": apiKey,
+	}
+	return submitLastfmCommand(parameters)
+}
+
+// UserGetTopArtists accesses the endpoint defined as user.getTopArtists
 // user  : The user name to fetch top artists for.
 // period : overall | 7day | 1month | 3month | 6month | 12month - The time period over which to retrieve top artists for.
 // limit : The number of results to fetch per page. Defaults to 50.
